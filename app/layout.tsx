@@ -6,6 +6,7 @@ import './globals.css'
 import { ThemeProvider } from '@/components/providers/theme-provider'
 import { ConvexClientProvider } from '@/components/providers/convex-provider'
 import { ModalProvider } from '@/components/providers/modal-provider'
+import { EdgeStoreProvider } from '@/lib/edgestore'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -40,9 +41,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             disableTransitionOnChange
             storageKey="motion-theme-2"
           >
-            <Toaster />
-            <ModalProvider />
-            {children}
+            <EdgeStoreProvider>
+              <Toaster />
+              <ModalProvider />
+              {children}
+            </EdgeStoreProvider>
           </ThemeProvider>
         </ConvexClientProvider>
       </body>
