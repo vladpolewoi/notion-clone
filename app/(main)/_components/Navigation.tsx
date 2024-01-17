@@ -2,10 +2,9 @@
 
 import { cn } from '@/lib/utils'
 import { ChevronLeft, MenuIcon, Plus, PlusCircle, Search, Settings, Trash } from 'lucide-react'
-import { useParams, usePathname } from 'next/navigation'
+import { useParams, usePathname, useRouter } from 'next/navigation'
 import { ElementRef, useEffect, useRef, useState } from 'react'
 import { useMediaQuery } from 'usehooks-ts'
-import { isModuleNamespaceObject } from 'util/types'
 import UserItem from './UserItem'
 import { useMutation } from 'convex/react'
 import { api } from '@/convex/_generated/api'
@@ -23,6 +22,7 @@ const Navigation = () => {
   const settings = useSettings()
   const pathname = usePathname()
   const params = useParams()
+  const router = useRouter()
   const isMobile = useMediaQuery('(max-width: 768px)')
   const create = useMutation(api.documents.create)
 
@@ -106,7 +106,9 @@ const Navigation = () => {
   }
 
   const handleCreate = () => {
-    const promise = create({ title: 'Untitled' })
+    const promise = create({ title: 'Untitled' }).then((documentId) => {
+      router.push(`/documents/${documentId}`)
+    })
 
     toast.promise(promise, {
       loading: 'Creating a new note...',

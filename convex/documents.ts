@@ -261,6 +261,7 @@ export const update = mutation({
     isPublished: v.optional(v.boolean()),
   },
   handler: async (ctx, args) => {
+    console.log('UPDATE')
     const identity = await ctx.auth.getUserIdentity()
 
     if (!identity) {
@@ -282,6 +283,7 @@ export const update = mutation({
 
     const document = await ctx.db.patch(id, rest)
 
+    console.log('Patch')
     return document
   },
 })
