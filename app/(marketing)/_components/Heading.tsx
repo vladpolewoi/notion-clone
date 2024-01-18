@@ -17,8 +17,7 @@ export const Heading = () => {
         <span className="underline ml-3">Motion</span>
       </h1>
       <h3 className="text-base sm:text-xl md:text-2xl font-medium">
-        Motion is the connected workspace where <br /> better, faster work
-        happens.
+        Motion is the connected workspace where <br /> better, faster work happens.
       </h3>
       {isLoading && (
         <div className="w-full flex items-center justify-center">
